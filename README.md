@@ -1,1 +1,1 @@
-# TSQL_Samples
+# Useful-SQL-Scripts
