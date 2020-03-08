@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETL_Prototype_V1", "ETL_Prototype_V1\ETL_Prototype_V1.dtproj", "{AE397CF1-5808-49BE-8BC7-7330BCABD9CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE397CF1-5808-49BE-8BC7-7330BCABD9CD}.Development|Default.ActiveCfg = Development
+		{AE397CF1-5808-49BE-8BC7-7330BCABD9CD}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs.navihealth.us:8080/tfs/navihealthba
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ETL_Prototype_V1\\ETL_Prototype_V1.dtproj
+		SccProjectName1 = ETL_Prototype_V1
+		SccLocalPath1 = ETL_Prototype_V1
+	EndGlobalSection
+EndGlobal
