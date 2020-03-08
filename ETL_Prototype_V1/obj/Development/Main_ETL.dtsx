@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/19/2020 2:09:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NHLA05673"
+  DTS:CreatorName="NAVIHEALTH\Gerald.Spangler"
+  DTS:DTSID="{57565527-4B54-43DC-AB6A-82451B182353}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.5026.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Main_ETL"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{A04D49EF-A1CD-489E-B44B-6533E3D26DB8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ABD3CE5B-36ED-436C-84D1-439FC3B05BAC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordsReady">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Processes Need Run?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Determine how many processes need run now"
+      DTS:DTSID="{D27F397C-75B8-47CB-8D50-FA3E1610A640}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Processes Need Run?"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+          SQLTask:SqlStatementSource="DECLARE @HourlyProcessesToRun INT&#xA;&#x9;,&#x9;@DailyProcessesToRun INT&#xA;&#xA;&#xA;SET @HourlyProcessesToRun = &#xA;&#x9;(&#xA;&#x9;&#x9;SELECT&#x9;COUNT(1)&#xA;&#x9;&#x9;FROM&#x9;DWUSER.dbo.AuthProcessMaster&#x9;AS&#x9;PM WITH (NOLOCK)&#xA;&#x9;&#x9;WHERE&#x9;PM.ProcessFrequencyKey = 'Daily' AND CAST(ISNULL(LastRunDate,GETDATE()-1) AS DATE) &lt; CAST(GETDATE() AS DATE)&#xA;&#x9;)&#x9;&#xA;&#xA;SET @DailyProcessesToRun = &#xA;&#x9;(&#xA;&#x9;&#x9;SELECT&#x9;COUNT(1)&#xA;&#x9;&#x9;FROM&#x9;DWUSER.dbo.AuthProcessMaster&#x9;AS&#x9;PM WITH (NOLOCK)&#xA;&#x9;&#x9;WHERE&#x9;PM.ProcessFrequencyKey = 'Hourly' AND ISNULL(LastRunDate,DATEADD(HOUR,1,GETDATE())) &gt; GETDATE()&#xA;&#x9;)&#x9;&#xA;&#xA;INSERT INTO DWUser.dbo.ETL4_TestLog (ETLMessage,ExecutionTime)&#xA;SELECT CONCAT('There are ',@HourlyProcessesToRun,' hourly and ',@DailyProcessesToRun,' daily processes to be run.'),GETDATE()&#xA;&#xA;UPDATE&#x9;DWUser.dbo.AuthProcessMaster&#xA;SET&#x9;&#x9;ProcessStatus = 'Waiting'&#xA;,&#x9;&#x9;ProcessStatusDate = GETDATE()&#xA;,&#x9;&#x9;LastRunDate = NULL&#xA;WHERE&#x9;ProcessFrequencyKey = 'Daily' AND CAST(ISNULL(LastRunDate,GETDATE()-1) AS DATE) &lt; CAST(GETDATE() AS DATE)&#xA;&#xA;INSERT INTO DWUser.dbo.ETL4_TestLog (ETLMessage,ExecutionTime)&#xA;SELECT CONCAT(@@ROWCOUNT,' Daily processes have been updated for Execution'),GETDATE()&#xA;&#xA;&#xA;UPDATE&#x9;DWUser.dbo.AuthProcessMaster&#xA;SET&#x9;&#x9;ProcessStatus = 'Waiting'&#xA;,&#x9;&#x9;ProcessStatusDate = GETDATE()&#xA;,&#x9;&#x9;LastRunDate = NULL&#xA;WHERE&#x9;ProcessFrequencyKey = 'Hourly' AND ISNULL(LastRunDate,DATEADD(HOUR,1,GETDATE())) &gt; GETDATE()&#xA;&#xA;INSERT INTO DWUser.dbo.ETL4_TestLog (ETLMessage,ExecutionTime)&#xA;SELECT CONCAT(@@ROWCOUNT,' Hourly processes have been updated for Execution'),GETDATE()&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Processes Need Run?"
+          TopLeft="216,24" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

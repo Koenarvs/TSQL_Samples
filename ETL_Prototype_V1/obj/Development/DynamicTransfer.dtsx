@@ -1,0 +1,3147 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/4/2020 12:42:46 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NHLA05673"
+  DTS:CreatorName="NAVIHEALTH\Gerald.Spangler"
+  DTS:DTSID="{46E8CD27-9B1D-4C16-8C76-113C5E049582}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.5026.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DynamicTransfer"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{ED457EA7-D96A-44FC-9DB8-304C22ABD110}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DynamicDestinationConnection]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{28ab5e5d-0ece-487f-bfd2-5f7114c7dad2}"
+      DTS:ObjectName="DynamicDestinationConnection">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::DestinationConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=P10-DWDB-03;Initial Catalog=DWStaging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DynamicSourceConnection]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{D2F5DD3D-BA90-4989-B4BC-2CF268AB495B}"
+      DTS:ObjectName="DynamicSourceConnection">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::SourceConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=CMDB;Initial Catalog=CareManagement;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{09180D22-FDA0-4518-8716-ADAE2EE855F7}"
+      DTS:ObjectName="DestinaionDB"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">DWStaging</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{6F3A8849-46CE-4762-80D4-15DF1062E8C5}"
+      DTS:ObjectName="DestinationSchema"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">dbo</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{A81E8A24-CED6-4846-BEC4-1EBD2C550450}"
+      DTS:ObjectName="DestinationServer"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">P10-DWDB-03</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{8FC1E535-6C1A-40EB-8B6F-311A0191B06E}"
+      DTS:ObjectName="DestinationTable"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">EpisodesRaw</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{A0255F90-7EAB-4010-A7C6-EFF6E7AD0A98}"
+      DTS:ObjectName="IncrementalUpdateDB">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{05CA29FF-0272-4111-AE46-34E63BBE8BDC}"
+      DTS:ObjectName="IncrementalUpdateField"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">ModifiedDateTime</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{B09EA430-20F7-4265-A734-F4EFB3753346}"
+      DTS:ObjectName="IncrementalUpdateSchema">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{2A2AAFBF-1D70-40EF-BCF3-26E1752B31D4}"
+      DTS:ObjectName="IncrementalUpdateServer">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C8217358-76F8-4D27-AAAF-ED636AE6855A}"
+      DTS:ObjectName="IncrementalUpdateTable">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{EA8D6B27-B8AA-4B3A-9171-6BE8851ADB47}"
+      DTS:ObjectName="IsThisLoadIncremental"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{CDEB079E-33D7-473D-B23E-3CB7B8A20BD7}"
+      DTS:ObjectName="SourceDB"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">CareManagement</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{AE15F0BC-8744-49F5-82E1-411A089E7E7E}"
+      DTS:ObjectName="SourceSchema"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">dbo</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{FE24BB7F-81A0-45BA-847D-214010BA525D}"
+      DTS:ObjectName="SourceServer"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">CMDB</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{D9FF43FC-8560-4557-93D0-BB975086B977}"
+      DTS:ObjectName="SourceTable"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Episodes</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5ACF482D-22D0-4DDE-8ACC-CDB6243BACEC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Data Source=&quot;+ @[$Package::DestinationServer] +&quot;;Initial Catalog=&quot;+ @[$Package::DestinaionDB] +&quot;;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationConnectionString">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=P10-DWDB-03;Initial Catalog=DWStaging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ADECA4EF-6129-4817-B7C4-5FA0237152AA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationValidationLog">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4C6444D1-26AE-4DB2-B10C-1A37D0F1300B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationValidationPassed">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E3E1173C-7F99-4374-ABF2-4E9B88514A2C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DynamicDestinationQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">dbo.EpisodesRaw</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A7BE83F5-3FF3-4CAE-8192-58F8CBA32350}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DynamicLoadQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT * FROM dbo.Episodes</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E6AEB6FA-D0AF-49C0-A229-ED4585511E9A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Data Source=&quot;+ @[$Package::SourceServer] +&quot;;Initial Catalog=&quot;+ @[$Package::SourceDB] +&quot;;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceConnectionString">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=CMDB;Initial Catalog=CareManagement;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E5771DB2-996A-49A5-AA70-22D5093D1244}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceValidationLog">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4EC566D9-95E9-4688-9B0F-7D42248E5BCA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceValidationPassed">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Dynamic Transfer Query"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A551FE16-73A0-43A6-93FA-6B66C85BA67A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Dynamic Transfer Query"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D2F5DD3D-BA90-4989-B4BC-2CF268AB495B}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Target Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D3395443-1DE9-4ABC-92F3-AEE13782BD99}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Target Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{28ab5e5d-0ece-487f-bfd2-5f7114c7dad2}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Drop Target table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8CD21C5F-2B9F-441C-B4DF-9979749B9C9B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop Target table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{28ab5e5d-0ece-487f-bfd2-5f7114c7dad2}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3B88F6A8-3966-40F9-8532-AAAC8EF3DF7E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Table\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable">User::DynamicDestinationQuery</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">4</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DynamicDestinationConnection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DynamicDestinationConnection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EpisodeID]"
+                      cachedDataType="i4"
+                      cachedName="EpisodeID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EpisodeID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EpisodeID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientID]"
+                      cachedDataType="i4"
+                      cachedName="PatientID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ContractID]"
+                      cachedDataType="i4"
+                      cachedName="ContractID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CareSettingID]"
+                      cachedDataType="i4"
+                      cachedName="CareSettingID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CareSettingID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CareSettingID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AttendingMDID]"
+                      cachedDataType="i4"
+                      cachedName="AttendingMDID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AttendingMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AttendingMDID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PGPAttendingMDID]"
+                      cachedDataType="i4"
+                      cachedName="PGPAttendingMDID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PGPAttendingMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PGPAttendingMDID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReferringMDID]"
+                      cachedDataType="i4"
+                      cachedName="ReferringMDID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReferringMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReferringMDID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AdmitDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="AdmitDate"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AdmitDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AdmitDate]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DischargeDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DischargeDate"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DischargeDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DischargeDate]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DischargeServiceID]"
+                      cachedDataType="i4"
+                      cachedName="DischargeServiceID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DischargeServiceID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DischargeServiceID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsCurrentEpisode]"
+                      cachedDataType="bool"
+                      cachedName="IsCurrentEpisode"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrentEpisode]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCurrentEpisode]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RiskForReadmission]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RiskForReadmission"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RiskForReadmission]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RiskForReadmission]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityID]"
+                      cachedDataType="i4"
+                      cachedName="FacilityID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FacilityID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EpisodeOfCareID]"
+                      cachedDataType="i4"
+                      cachedName="EpisodeOfCareID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EpisodeOfCareID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EpisodeOfCareID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoomNum]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="RoomNum"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoomNum]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RoomNum]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CurrentPlan]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="CurrentPlan"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CurrentPlan]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CurrentPlan]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DCPlanning]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="DCPlanning"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DCPlanning]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DCPlanning]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Nursing]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Nursing"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nursing]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Nursing]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Therapy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Therapy"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Therapy]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Therapy]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Comments]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Comments"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReadmitReason]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="ReadmitReason"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReadmitReason]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReadmitReason]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CGTotalHours]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CGTotalHours"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CGTotalHours]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CGTotalHours]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CreatedBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="CreatedBy"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedBy]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatedDate"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ModifiedBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="ModifiedBy"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedBy]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedBy]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MedicalComplexity]"
+                      cachedDataType="ui1"
+                      cachedName="MedicalComplexity"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MedicalComplexity]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MedicalComplexity]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNFExpectedLOS]"
+                      cachedDataType="numeric"
+                      cachedName="SNFExpectedLOS"
+                      cachedPrecision="18"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFExpectedLOS]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFExpectedLOS]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RiskLevelID]"
+                      cachedDataType="i4"
+                      cachedName="RiskLevelID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RiskLevelID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RiskLevelID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NoInterventionNotes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="NoInterventionNotes"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoInterventionNotes]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NoInterventionNotes]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SettingCompID]"
+                      cachedDataType="i4"
+                      cachedName="SettingCompID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SettingCompID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SettingCompID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNFGain]"
+                      cachedDataType="numeric"
+                      cachedName="SNFGain"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFGain]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFGain]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HHGain]"
+                      cachedDataType="numeric"
+                      cachedName="HHGain"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HHGain]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[HHGain]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PreviousServiceID]"
+                      cachedDataType="i4"
+                      cachedName="PreviousServiceID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousServiceID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousServiceID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ManagementID]"
+                      cachedDataType="i4"
+                      cachedName="ManagementID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ManagementID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ManagementID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OtherDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2000"
+                      cachedName="OtherDescription"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OtherDescription]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[OtherDescription]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PreviousTransServiceID]"
+                      cachedDataType="i4"
+                      cachedName="PreviousTransServiceID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousTransServiceID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousTransServiceID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNFProjectedAvgDischargeBM]"
+                      cachedDataType="numeric"
+                      cachedName="SNFProjectedAvgDischargeBM"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeBM]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeBM]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNFProjectedAvgDischargeDA]"
+                      cachedDataType="numeric"
+                      cachedName="SNFProjectedAvgDischargeDA"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeDA]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeDA]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNFProjectedAvgDischargeAC]"
+                      cachedDataType="numeric"
+                      cachedName="SNFProjectedAvgDischargeAC"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeAC]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeAC]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNFProjectedAvgDischargeTotal]"
+                      cachedDataType="numeric"
+                      cachedName="SNFProjectedAvgDischargeTotal"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeTotal]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeTotal]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RAR]"
+                      cachedDataType="numeric"
+                      cachedName="RAR"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RAR]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RAR]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ColemanRiskLevelID]"
+                      cachedDataType="i4"
+                      cachedName="ColemanRiskLevelID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ColemanRiskLevelID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ColemanRiskLevelID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OPTCompleted]"
+                      cachedDataType="bool"
+                      cachedName="OPTCompleted"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPTCompleted]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPTCompleted]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Station]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Station"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Station]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Station]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Bed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Bed"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Bed]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bed]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientStayID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PatientStayID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientStayID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientStayID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CurrentAnchor]"
+                      cachedDataType="bool"
+                      cachedName="CurrentAnchor"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CurrentAnchor]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CurrentAnchor]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Anchor]"
+                      cachedDataType="bool"
+                      cachedName="Anchor"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Anchor]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Anchor]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReAdmission]"
+                      cachedDataType="bool"
+                      cachedName="ReAdmission"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReAdmission]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReAdmission]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WorkingDRGAnchor]"
+                      cachedDataType="bool"
+                      cachedName="WorkingDRGAnchor"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkingDRGAnchor]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[WorkingDRGAnchor]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WorkingDRGReAdmission]"
+                      cachedDataType="bool"
+                      cachedName="WorkingDRGReAdmission"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkingDRGReAdmission]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[WorkingDRGReAdmission]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SNFCGAssist]"
+                      cachedDataType="numeric"
+                      cachedName="SNFCGAssist"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFCGAssist]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFCGAssist]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HHCGAssist]"
+                      cachedDataType="numeric"
+                      cachedName="HHCGAssist"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HHCGAssist]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[HHCGAssist]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SurgicalMDID]"
+                      cachedDataType="i4"
+                      cachedName="SurgicalMDID"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SurgicalMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgicalMDID]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DataSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DataSource"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DataSource]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DataSource]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PreviousSettingAdmitDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="PreviousSettingAdmitDate"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousSettingAdmitDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousSettingAdmitDate]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TransitionReason]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="256"
+                      cachedName="TransitionReason"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransitionReason]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransitionReason]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CareOrganizationId]"
+                      cachedDataType="i4"
+                      cachedName="CareOrganizationId"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CareOrganizationId]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CareOrganizationId]" />
+                    <inputColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ContractMarketId]"
+                      cachedDataType="i4"
+                      cachedName="ContractMarketId"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractMarketId]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractMarketId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EpisodeID]"
+                      dataType="i4"
+                      name="EpisodeID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractID]"
+                      dataType="i4"
+                      name="ContractID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CareSettingID]"
+                      dataType="i4"
+                      name="CareSettingID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AttendingMDID]"
+                      dataType="i4"
+                      name="AttendingMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReferringMDID]"
+                      dataType="i4"
+                      name="ReferringMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PGPAttendingMDID]"
+                      dataType="i4"
+                      name="PGPAttendingMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AdmitDate]"
+                      dataType="dbTimeStamp"
+                      name="AdmitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DischargeDate]"
+                      dataType="dbTimeStamp"
+                      name="DischargeDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DischargeServiceID]"
+                      dataType="i4"
+                      name="DischargeServiceID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrentEpisode]"
+                      dataType="bool"
+                      name="IsCurrentEpisode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RiskForReadmission]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RiskForReadmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityID]"
+                      dataType="i4"
+                      name="FacilityID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EpisodeOfCareID]"
+                      dataType="i4"
+                      name="EpisodeOfCareID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoomNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RoomNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CurrentPlan]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="CurrentPlan" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DCPlanning]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DCPlanning" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nursing]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Nursing" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Therapy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Therapy" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReadmitReason]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="ReadmitReason" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CGTotalHours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="CGTotalHours" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CreatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ModifiedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MedicalComplexity]"
+                      dataType="ui1"
+                      name="MedicalComplexity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFExpectedLOS]"
+                      dataType="numeric"
+                      name="SNFExpectedLOS"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RiskLevelID]"
+                      dataType="i4"
+                      name="RiskLevelID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NoInterventionNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="NoInterventionNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SettingCompID]"
+                      dataType="i4"
+                      name="SettingCompID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFGain]"
+                      dataType="numeric"
+                      name="SNFGain"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HHGain]"
+                      dataType="numeric"
+                      name="HHGain"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousServiceID]"
+                      dataType="i4"
+                      name="PreviousServiceID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ManagementID]"
+                      dataType="i4"
+                      name="ManagementID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OtherDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2000"
+                      name="OtherDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousTransServiceID]"
+                      dataType="i4"
+                      name="PreviousTransServiceID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeBM]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeBM"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeDA]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeDA"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeAC]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeAC"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFProjectedAvgDischargeTotal]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeTotal"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RAR]"
+                      dataType="numeric"
+                      name="RAR"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ColemanRiskLevelID]"
+                      dataType="i4"
+                      name="ColemanRiskLevelID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPTCompleted]"
+                      dataType="bool"
+                      name="OPTCompleted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Station]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Station" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Bed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Bed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientStayID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientStayID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CurrentAnchor]"
+                      dataType="bool"
+                      name="CurrentAnchor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Anchor]"
+                      dataType="bool"
+                      name="Anchor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReAdmission]"
+                      dataType="bool"
+                      name="ReAdmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkingDRGAnchor]"
+                      dataType="bool"
+                      name="WorkingDRGAnchor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkingDRGReAdmission]"
+                      dataType="bool"
+                      name="WorkingDRGReAdmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SNFCGAssist]"
+                      dataType="numeric"
+                      name="SNFCGAssist"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HHCGAssist]"
+                      dataType="numeric"
+                      name="HHCGAssist"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SurgicalMDID]"
+                      dataType="i4"
+                      name="SurgicalMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DischargeStatusCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DischargeStatusCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DataSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DataSource" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousSettingAdmitDate]"
+                      dataType="dbTimeStamp"
+                      name="PreviousSettingAdmitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransitionReason]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="TransitionReason" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CareOrganizationId]"
+                      dataType="i4"
+                      name="CareOrganizationId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractMarketId]"
+                      dataType="i4"
+                      name="ContractMarketId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Table\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::DynamicLoadQuery</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Table\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DynamicSourceConnection]"
+                  connectionManagerRefId="Package.ConnectionManagers[DynamicSourceConnection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EpisodeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EpisodeID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EpisodeID]"
+                      name="EpisodeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractID]"
+                      name="ContractID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CareSettingID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CareSettingID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CareSettingID]"
+                      name="CareSettingID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AttendingMDID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AttendingMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AttendingMDID]"
+                      name="AttendingMDID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PGPAttendingMDID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PGPAttendingMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PGPAttendingMDID]"
+                      name="PGPAttendingMDID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReferringMDID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReferringMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReferringMDID]"
+                      name="ReferringMDID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AdmitDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AdmitDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AdmitDate]"
+                      name="AdmitDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DischargeDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DischargeDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DischargeDate]"
+                      name="DischargeDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DischargeServiceID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DischargeServiceID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DischargeServiceID]"
+                      name="DischargeServiceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCurrentEpisode]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCurrentEpisode]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsCurrentEpisode]"
+                      name="IsCurrentEpisode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RiskForReadmission]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RiskForReadmission]"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RiskForReadmission]"
+                      name="RiskForReadmission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FacilityID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FacilityID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FacilityID]"
+                      name="FacilityID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EpisodeOfCareID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EpisodeOfCareID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EpisodeOfCareID]"
+                      name="EpisodeOfCareID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RoomNum]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RoomNum]"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RoomNum]"
+                      name="RoomNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CurrentPlan]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CurrentPlan]"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CurrentPlan]"
+                      name="CurrentPlan"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DCPlanning]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DCPlanning]"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DCPlanning]"
+                      name="DCPlanning"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Nursing]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Nursing]"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Nursing]"
+                      name="Nursing"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Therapy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Therapy]"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Therapy]"
+                      name="Therapy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      name="Comments"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReadmitReason]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReadmitReason]"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReadmitReason]"
+                      name="ReadmitReason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CGTotalHours]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CGTotalHours]"
+                      length="10"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CGTotalHours]"
+                      name="CGTotalHours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedBy]"
+                      length="25"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedBy]"
+                      name="CreatedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                      name="CreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedBy]"
+                      length="25"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedBy]"
+                      name="ModifiedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MedicalComplexity]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MedicalComplexity]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MedicalComplexity]"
+                      name="MedicalComplexity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFExpectedLOS]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFExpectedLOS]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFExpectedLOS]"
+                      name="SNFExpectedLOS"
+                      precision="18"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RiskLevelID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RiskLevelID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RiskLevelID]"
+                      name="RiskLevelID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NoInterventionNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NoInterventionNotes]"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NoInterventionNotes]"
+                      name="NoInterventionNotes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SettingCompID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SettingCompID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SettingCompID]"
+                      name="SettingCompID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFGain]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFGain]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFGain]"
+                      name="SNFGain"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[HHGain]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HHGain]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[HHGain]"
+                      name="HHGain"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousServiceID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreviousServiceID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousServiceID]"
+                      name="PreviousServiceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ManagementID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ManagementID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ManagementID]"
+                      name="ManagementID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[OtherDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OtherDescription]"
+                      length="2000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[OtherDescription]"
+                      name="OtherDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousTransServiceID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreviousTransServiceID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousTransServiceID]"
+                      name="PreviousTransServiceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeBM]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeBM]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeBM]"
+                      name="SNFProjectedAvgDischargeBM"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeDA]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeDA]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeDA]"
+                      name="SNFProjectedAvgDischargeDA"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeAC]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeAC]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeAC]"
+                      name="SNFProjectedAvgDischargeAC"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeTotal]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeTotal]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFProjectedAvgDischargeTotal]"
+                      name="SNFProjectedAvgDischargeTotal"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RAR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RAR]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RAR]"
+                      name="RAR"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ColemanRiskLevelID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ColemanRiskLevelID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ColemanRiskLevelID]"
+                      name="ColemanRiskLevelID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPTCompleted]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPTCompleted]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPTCompleted]"
+                      name="OPTCompleted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Station]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Station]"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Station]"
+                      name="Station"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bed]"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bed]"
+                      name="Bed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientStayID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientStayID]"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PatientStayID]"
+                      name="PatientStayID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PGPStayID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PGPStayID]"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PGPStayID]"
+                      name="PGPStayID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CurrentAnchor]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CurrentAnchor]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CurrentAnchor]"
+                      name="CurrentAnchor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Anchor]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Anchor]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Anchor]"
+                      name="Anchor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReAdmission]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReAdmission]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ReAdmission]"
+                      name="ReAdmission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[WorkingDRGAnchor]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WorkingDRGAnchor]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[WorkingDRGAnchor]"
+                      name="WorkingDRGAnchor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[WorkingDRGReAdmission]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WorkingDRGReAdmission]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[WorkingDRGReAdmission]"
+                      name="WorkingDRGReAdmission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFCGAssist]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFCGAssist]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SNFCGAssist]"
+                      name="SNFCGAssist"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[HHCGAssist]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HHCGAssist]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[HHCGAssist]"
+                      name="HHCGAssist"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgicalMDID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SurgicalMDID]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SurgicalMDID]"
+                      name="SurgicalMDID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispositionCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DispositionCode]"
+                      length="3"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispositionCode]"
+                      name="DispositionCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DataSource]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DataSource]"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DataSource]"
+                      name="DataSource"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousSettingAdmitDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreviousSettingAdmitDate]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PreviousSettingAdmitDate]"
+                      name="PreviousSettingAdmitDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransitionReason]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransitionReason]"
+                      length="256"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransitionReason]"
+                      name="TransitionReason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CareOrganizationId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CareOrganizationId]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CareOrganizationId]"
+                      name="CareOrganizationId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractMarketId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractMarketId]"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractMarketId]"
+                      name="ContractMarketId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EpisodeID]"
+                      dataType="i4"
+                      name="EpisodeID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractID]"
+                      dataType="i4"
+                      name="ContractID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CareSettingID]"
+                      dataType="i4"
+                      name="CareSettingID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AttendingMDID]"
+                      dataType="i4"
+                      name="AttendingMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PGPAttendingMDID]"
+                      dataType="i4"
+                      name="PGPAttendingMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReferringMDID]"
+                      dataType="i4"
+                      name="ReferringMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AdmitDate]"
+                      dataType="dbTimeStamp"
+                      name="AdmitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DischargeDate]"
+                      dataType="dbTimeStamp"
+                      name="DischargeDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DischargeServiceID]"
+                      dataType="i4"
+                      name="DischargeServiceID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsCurrentEpisode]"
+                      dataType="bool"
+                      name="IsCurrentEpisode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RiskForReadmission]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RiskForReadmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FacilityID]"
+                      dataType="i4"
+                      name="FacilityID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EpisodeOfCareID]"
+                      dataType="i4"
+                      name="EpisodeOfCareID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RoomNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="RoomNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CurrentPlan]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="CurrentPlan" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DCPlanning]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="DCPlanning" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Nursing]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Nursing" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Therapy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Therapy" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReadmitReason]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="ReadmitReason" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CGTotalHours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="CGTotalHours" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CreatedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ModifiedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MedicalComplexity]"
+                      dataType="ui1"
+                      name="MedicalComplexity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFExpectedLOS]"
+                      dataType="numeric"
+                      name="SNFExpectedLOS"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RiskLevelID]"
+                      dataType="i4"
+                      name="RiskLevelID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NoInterventionNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="NoInterventionNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SettingCompID]"
+                      dataType="i4"
+                      name="SettingCompID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFGain]"
+                      dataType="numeric"
+                      name="SNFGain"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HHGain]"
+                      dataType="numeric"
+                      name="HHGain"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreviousServiceID]"
+                      dataType="i4"
+                      name="PreviousServiceID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ManagementID]"
+                      dataType="i4"
+                      name="ManagementID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OtherDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2000"
+                      name="OtherDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreviousTransServiceID]"
+                      dataType="i4"
+                      name="PreviousTransServiceID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeBM]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeBM"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeDA]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeDA"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeAC]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeAC"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFProjectedAvgDischargeTotal]"
+                      dataType="numeric"
+                      name="SNFProjectedAvgDischargeTotal"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RAR]"
+                      dataType="numeric"
+                      name="RAR"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ColemanRiskLevelID]"
+                      dataType="i4"
+                      name="ColemanRiskLevelID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPTCompleted]"
+                      dataType="bool"
+                      name="OPTCompleted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Station]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Station" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Bed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PatientStayID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientStayID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PGPStayID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PGPStayID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CurrentAnchor]"
+                      dataType="bool"
+                      name="CurrentAnchor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Anchor]"
+                      dataType="bool"
+                      name="Anchor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ReAdmission]"
+                      dataType="bool"
+                      name="ReAdmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WorkingDRGAnchor]"
+                      dataType="bool"
+                      name="WorkingDRGAnchor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WorkingDRGReAdmission]"
+                      dataType="bool"
+                      name="WorkingDRGReAdmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SNFCGAssist]"
+                      dataType="numeric"
+                      name="SNFCGAssist"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HHCGAssist]"
+                      dataType="numeric"
+                      name="HHCGAssist"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SurgicalMDID]"
+                      dataType="i4"
+                      name="SurgicalMDID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DispositionCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="DispositionCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DataSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DataSource" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreviousSettingAdmitDate]"
+                      dataType="dbTimeStamp"
+                      name="PreviousSettingAdmitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransitionReason]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      name="TransitionReason" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CareOrganizationId]"
+                      dataType="i4"
+                      name="CareOrganizationId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractMarketId]"
+                      dataType="i4"
+                      name="ContractMarketId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EpisodeID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EpisodeID]"
+                      name="EpisodeID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractID]"
+                      name="ContractID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CareSettingID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CareSettingID]"
+                      name="CareSettingID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AttendingMDID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AttendingMDID]"
+                      name="AttendingMDID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PGPAttendingMDID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PGPAttendingMDID]"
+                      name="PGPAttendingMDID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReferringMDID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReferringMDID]"
+                      name="ReferringMDID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AdmitDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AdmitDate]"
+                      name="AdmitDate" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DischargeDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DischargeDate]"
+                      name="DischargeDate" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DischargeServiceID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DischargeServiceID]"
+                      name="DischargeServiceID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCurrentEpisode]"
+                      dataType="bool"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsCurrentEpisode]"
+                      name="IsCurrentEpisode" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RiskForReadmission]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RiskForReadmission]"
+                      name="RiskForReadmission" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FacilityID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FacilityID]"
+                      name="FacilityID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EpisodeOfCareID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EpisodeOfCareID]"
+                      name="EpisodeOfCareID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RoomNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RoomNum]"
+                      name="RoomNum" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CurrentPlan]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CurrentPlan]"
+                      name="CurrentPlan" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DCPlanning]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DCPlanning]"
+                      name="DCPlanning" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Nursing]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Nursing]"
+                      name="Nursing" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Therapy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Therapy]"
+                      name="Therapy" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      name="Comments" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReadmitReason]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReadmitReason]"
+                      name="ReadmitReason" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CGTotalHours]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CGTotalHours]"
+                      name="CGTotalHours" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedBy]"
+                      name="CreatedBy" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                      name="CreatedDate" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ModifiedBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ModifiedBy]"
+                      name="ModifiedBy" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MedicalComplexity]"
+                      dataType="ui1"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MedicalComplexity]"
+                      name="MedicalComplexity" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFExpectedLOS]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFExpectedLOS]"
+                      name="SNFExpectedLOS"
+                      precision="18"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RiskLevelID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RiskLevelID]"
+                      name="RiskLevelID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NoInterventionNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NoInterventionNotes]"
+                      name="NoInterventionNotes" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SettingCompID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SettingCompID]"
+                      name="SettingCompID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFGain]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFGain]"
+                      name="SNFGain"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HHGain]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HHGain]"
+                      name="HHGain"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreviousServiceID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreviousServiceID]"
+                      name="PreviousServiceID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ManagementID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ManagementID]"
+                      name="ManagementID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OtherDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2000"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OtherDescription]"
+                      name="OtherDescription" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreviousTransServiceID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreviousTransServiceID]"
+                      name="PreviousTransServiceID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeBM]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeBM]"
+                      name="SNFProjectedAvgDischargeBM"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeDA]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeDA]"
+                      name="SNFProjectedAvgDischargeDA"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeAC]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeAC]"
+                      name="SNFProjectedAvgDischargeAC"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeTotal]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFProjectedAvgDischargeTotal]"
+                      name="SNFProjectedAvgDischargeTotal"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RAR]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RAR]"
+                      name="RAR"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ColemanRiskLevelID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ColemanRiskLevelID]"
+                      name="ColemanRiskLevelID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPTCompleted]"
+                      dataType="bool"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPTCompleted]"
+                      name="OPTCompleted" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Station]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Station]"
+                      name="Station" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bed]"
+                      name="Bed" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientStayID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PatientStayID]"
+                      name="PatientStayID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PGPStayID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PGPStayID]"
+                      name="PGPStayID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CurrentAnchor]"
+                      dataType="bool"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CurrentAnchor]"
+                      name="CurrentAnchor" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Anchor]"
+                      dataType="bool"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Anchor]"
+                      name="Anchor" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReAdmission]"
+                      dataType="bool"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ReAdmission]"
+                      name="ReAdmission" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WorkingDRGAnchor]"
+                      dataType="bool"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WorkingDRGAnchor]"
+                      name="WorkingDRGAnchor" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WorkingDRGReAdmission]"
+                      dataType="bool"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WorkingDRGReAdmission]"
+                      name="WorkingDRGReAdmission" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFCGAssist]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SNFCGAssist]"
+                      name="SNFCGAssist"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HHCGAssist]"
+                      dataType="numeric"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HHCGAssist]"
+                      name="HHCGAssist"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SurgicalMDID]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SurgicalMDID]"
+                      name="SurgicalMDID" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DispositionCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DispositionCode]"
+                      name="DispositionCode" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DataSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DataSource]"
+                      name="DataSource" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreviousSettingAdmitDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreviousSettingAdmitDate]"
+                      name="PreviousSettingAdmitDate" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransitionReason]"
+                      codePage="1252"
+                      dataType="str"
+                      length="256"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransitionReason]"
+                      name="TransitionReason" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CareOrganizationId]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CareOrganizationId]"
+                      name="CareOrganizationId" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractMarketId]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractMarketId]"
+                      name="ContractMarketId" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Table.Paths[OLE DB Source Output]"
+              endId="Package\Load Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Table\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Pretransfer Validation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2EBF29AC-2B4E-437C-AE52-F472899716A5}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pretransfer Validation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Pretransfer Validation\Compare Table Structures"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{C034B9B7-C19B-4F5E-A909-EA9158C2571A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Compare Table Structures"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Pretransfer Validation\Validate Source"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{057AF284-9AC9-4E47-9372-5D9DB43785B9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Validate Source"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{28ab5e5d-0ece-487f-bfd2-5f7114c7dad2}"
+              SQLTask:SqlStatementSource="EXEC DWUser.ETL.ValidateTableExists ?,?,?,? "
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="LogNotes"
+                SQLTask:DtsVariableName="User::SourceValidationLog" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ValidationPassed"
+                SQLTask:DtsVariableName="User::SourceValidationPassed" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="$Package::SourceServer"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Package::SourceDB"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="$Package::SourceSchema"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="$Package::SourceTable"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Pretransfer Validation\ValidateDestination"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{b3fcbe57-c4b8-480b-9104-9eac1fcec441}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ValidateDestination"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{28ab5e5d-0ece-487f-bfd2-5f7114c7dad2}"
+              SQLTask:SqlStatementSource="EXEC DWUser.ETL.ValidateTableExists ?,?,?,? "
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="LogNotes"
+                SQLTask:DtsVariableName="User::DestinationValidationLog" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ValidationPassed"
+                SQLTask:DtsVariableName="User::DestinationValidationPassed" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="$Package::DestinationServer"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="$Package::DestinaionDB"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="$Package::DestinationSchema"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="$Package::DestinationTable"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Pretransfer Validation.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{904586CA-52CD-43F9-8DCA-250C3298F0BF}"
+          DTS:From="Package\Pretransfer Validation\Validate Source"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Pretransfer Validation\Compare Table Structures" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Pretransfer Validation.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A014E36A-E48D-4FB3-92FD-042672CE70D2}"
+          DTS:From="Package\Pretransfer Validation\ValidateDestination"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Pretransfer Validation\Compare Table Structures" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Target Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7A804BE2-A125-41BD-A370-23F031162775}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Target Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{28ab5e5d-0ece-487f-bfd2-5f7114c7dad2}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C22EAAE3-43C5-482B-BDC0-115CEE4A51FF}"
+      DTS:From="Package\Pretransfer Validation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Drop Target table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{D413AFFB-A6C9-4145-839A-9D23748491BD}"
+      DTS:From="Package\Pretransfer Validation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Truncate Target Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{3E29B2C8-3D9A-4426-9115-322CE40CF229}"
+      DTS:From="Package\Create Target Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Create Dynamic Transfer Query" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{CC4E2620-FD25-449F-8606-5F0D7853BBAF}"
+      DTS:From="Package\Create Dynamic Transfer Query"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Load Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{F2623F84-420D-4AFD-841E-7F376A454AFA}"
+      DTS:From="Package\Pretransfer Validation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Create Target Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{BCFD6861-645C-4BD4-BCFA-60D8F28EB591}"
+      DTS:From="Package\Drop Target table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Create Target Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{A6F67B36-927A-47B5-ABB9-97FA4531DAC3}"
+      DTS:From="Package\Truncate Target Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Create Dynamic Transfer Query" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="219,42"
+          Id="Package\Pretransfer Validation\Validate Source"
+          TopLeft="14,12" />
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Pretransfer Validation\ValidateDestination"
+          TopLeft="264,13" />
+        <NodeLayout
+          Size="281,42"
+          Id="Package\Pretransfer Validation\Compare Table Structures"
+          TopLeft="103,97" />
+        <EdgeLayout
+          Id="Package\Pretransfer Validation.PrecedenceConstraints[Constraint]"
+          TopLeft="123.5,54">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="74.5,43"
+              Start="0,0"
+              End="74.5,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.6539278131635" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.6539278131635"
+                    Point2="0,25.6539278131635"
+                    Point3="4,25.6539278131635" />
+                  <mssgle:LineSegment
+                    End="70.5,25.6539278131635" />
+                  <mssgle:CubicBezierSegment
+                    Point1="70.5,25.6539278131635"
+                    Point2="74.5,25.6539278131635"
+                    Point3="74.5,29.6539278131635" />
+                  <mssgle:LineSegment
+                    End="74.5,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pretransfer Validation.PrecedenceConstraints[Constraint 1]"
+          TopLeft="380.5,55">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-91.5,42"
+              Start="0,0"
+              End="-91.5,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.0573248407643" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.0573248407643"
+                    Point2="0,25.0573248407643"
+                    Point3="-4,25.0573248407643" />
+                  <mssgle:LineSegment
+                    End="-87.5,25.0573248407643" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-87.5,25.0573248407643"
+                    Point2="-91.5,25.0573248407643"
+                    Point3="-91.5,29.0573248407643" />
+                  <mssgle:LineSegment
+                    End="-91.5,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="502,147"
+          Size="502,190"
+          Id="Package\Pretransfer Validation"
+          TopLeft="342.5,73" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Create Target Table"
+          TopLeft="709,356" />
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Create Dynamic Transfer Query"
+          TopLeft="479,509" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="796,398">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-166.333333333333,111"
+              Start="0,0"
+              End="-166.333333333333,103.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.1358885017421" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,62.1358885017421"
+                    Point2="0,66.1358885017421"
+                    Point3="-4,66.1358885017421" />
+                  <mssgle:LineSegment
+                    End="-162.333333333333,66.1358885017421" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-162.333333333333,66.1358885017421"
+                    Point2="-166.333333333333,66.1358885017421"
+                    Point3="-166.333333333333,70.1358885017421" />
+                  <mssgle:LineSegment
+                    End="-166.333333333333,103.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Load Table"
+          TopLeft="478,585" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="593.5,551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Truncate Target Table"
+          TopLeft="295,356" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Drop Target table"
+          TopLeft="506,357" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="592.75,263">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,94"
+              Start="0,0"
+              End="0,86.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="470,263">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-83,93"
+              Start="0,0"
+              End="-83,85.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.3276089828269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.3276089828269"
+                    Point2="0,31.3276089828269"
+                    Point3="-4,31.3276089828269" />
+                  <mssgle:LineSegment
+                    End="-79,31.3276089828269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-79,31.3276089828269"
+                    Point2="-83,31.3276089828269"
+                    Point3="-83,35.3276089828269" />
+                  <mssgle:LineSegment
+                    End="-83,85.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="717,263">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="79,93"
+              Start="0,0"
+              End="79,85.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.3276089828269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.3276089828269"
+                    Point2="0,31.3276089828269"
+                    Point3="4,31.3276089828269" />
+                  <mssgle:LineSegment
+                    End="75,31.3276089828269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="75,31.3276089828269"
+                    Point2="79,31.3276089828269"
+                    Point3="79,35.3276089828269" />
+                  <mssgle:LineSegment
+                    End="79,85.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="678,377.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31,0"
+              Start="0,0"
+              End="23.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="387,398">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="169.333333333333,111"
+              Start="0,0"
+              End="169.333333333333,103.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.1358885017421" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,62.1358885017421"
+                    Point2="0,66.1358885017421"
+                    Point3="4,66.1358885017421" />
+                  <mssgle:LineSegment
+                    End="165.333333333333,66.1358885017421" />
+                  <mssgle:CubicBezierSegment
+                    Point1="165.333333333333,66.1358885017421"
+                    Point2="169.333333333333,66.1358885017421"
+                    Point3="169.333333333333,70.1358885017421" />
+                  <mssgle:LineSegment
+                    End="169.333333333333,103.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Table\OLE DB Source"
+          TopLeft="170,275" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Table\OLE DB Destination"
+          TopLeft="487,275" />
+        <EdgeLayout
+          Id="Package\Load Table.Paths[OLE DB Source Output]"
+          TopLeft="320,296">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="167,0"
+              Start="0,0"
+              End="159.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="159.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Table\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

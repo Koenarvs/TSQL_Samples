@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/20/2020 9:51:46 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NHLA05673"
+  DTS:CreatorName="NAVIHEALTH\Gerald.Spangler"
+  DTS:DTSID="{C5949F8E-1971-46C6-B3D4-AEC857B74517}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.5026.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{5079AD22-02B6-4348-A18A-7152E6521224}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>

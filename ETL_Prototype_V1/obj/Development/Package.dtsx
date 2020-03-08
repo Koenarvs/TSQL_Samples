@@ -1,0 +1,971 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/19/2020 2:09:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NHLA05673"
+  DTS:CreatorName="NAVIHEALTH\Gerald.Spangler"
+  DTS:DTSID="{3533E9FB-3BEA-44CF-B9C0-7D0AADB443EA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.5026.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{2EAFD1E1-03D6-4444-9A98-582FE9C23DEE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ProcessMasterDependencyPreperation"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{03AB7270-4F0C-412D-AA3A-40879DCE6699}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ProcessMasterDependencyPreperation"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+          SQLTask:SqlStatementSource="EXEC dbo.AuthProcessMasterDependencyPreperation" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ProcessMasterSetForRun"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1385A1C6-CCDB-4D9E-BF61-724139D773D1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ProcessMasterSetForRun"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+          SQLTask:SqlStatementSource="EXEC AuthProcessMasterSetForRun" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Work Engines"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{5AD96AD7-945C-4095-A8BA-E7487458B639}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Work Engines">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Work Engines\Work Engine 1"
+          DTS:CreationName="STOCK:FORLOOP"
+          DTS:Description="For Loop Container"
+          DTS:DTSID="{E973C805-BB75-475F-8B95-82DC03F2A2D0}"
+          DTS:EvalExpression="@RecordsWaiting &gt;=  1"
+          DTS:ExecutableType="STOCK:FORLOOP"
+          DTS:LocaleID="-1"
+          DTS:MaxConcurrent="1"
+          DTS:ObjectName="Work Engine 1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{60364262-0CDF-47FF-BC24-5439761B3499}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="User"
+              DTS:ObjectName="DependenciesFailed">
+              <DTS:VariableValue
+                DTS:DataType="3">0</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{72421376-F1F9-48AB-B8E6-23C099FD48BE}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="User"
+              DTS:ObjectName="ProcessName">
+              <DTS:VariableValue
+                DTS:DataType="8"
+                xml:space="preserve"></DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{F30E95E7-FC0F-43C9-8DE7-3023C24511BF}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="User"
+              DTS:ObjectName="ProcessObjectType">
+              <DTS:VariableValue
+                DTS:DataType="8"
+                xml:space="preserve"></DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{93462590-882D-4852-9D7B-D355E5E72564}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="User"
+              DTS:ObjectName="ProcessType">
+              <DTS:VariableValue
+                DTS:DataType="8">Test.dtsx</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{4FF0662C-FF29-4AC1-9C5D-B23FBDAE6D7C}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="User"
+              DTS:ObjectName="RecordsWaiting">
+              <DTS:VariableValue
+                DTS:DataType="3">1</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{F744FCD2-0C65-4761-BF9D-5B9D04884F7C}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="User"
+              DTS:ObjectName="WorkEngineId">
+              <DTS:VariableValue
+                DTS:DataType="3">1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Are there records waiting on dependencies?"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{929011d9-c6c5-4289-aa84-9acdd8861c77}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Are there records waiting on dependencies?"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="Exec dbo.AuthProcessMasterIsWorkWaiting "
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="RecordsWaiting"
+                    SQLTask:DtsVariableName="User::RecordsWaiting" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Clear Variables"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{605AAFDA-5BF4-4A54-ACE1-7A02A7C9DA75}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Clear Variables"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="SELECT '' AS ProcessName, '' AS ProcessType, '' AS ProcessObjectType"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="ProcessName"
+                    SQLTask:DtsVariableName="User::ProcessName" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="ProcessType"
+                    SQLTask:DtsVariableName="User::ProcessType" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="ProcessObjectType"
+                    SQLTask:DtsVariableName="User::ProcessObjectType" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Delay Before looking for new work"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{18bdd1ca-a34a-4542-a4ef-3a7eb4dd2c5e}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delay Before looking for new work"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="2">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="EXEC dbo.AuthProcessMasterDelay" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Dependencies Failed?"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{8DE62EEB-06B9-4B51-BEF7-E9CA2295D2C1}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Dependencies Failed?"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="dbo.AuthProcessMasterAreDependenciesFailed ?"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="DependenciesFailed"
+                    SQLTask:DtsVariableName="User::DependenciesFailed" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::WorkEngineId"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="131"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Execute Package Task"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{730A4E39-6DF4-4425-8BD7-2D4F67CACFDB}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute Package Task"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:PropertyExpression
+                DTS:Name="PackageName">@[User::ProcessType]</DTS:PropertyExpression>
+              <DTS:EventHandlers>
+                <DTS:EventHandler
+                  DTS:refId="Package\Work Engines\Work Engine 1\Execute Package Task.EventHandlers[OnTaskFailed]"
+                  DTS:CreationName="OnTaskFailed"
+                  DTS:DTSID="{9A78B28D-37B5-4753-BE14-696F1E4FE823}"
+                  DTS:EventID="2"
+                  DTS:EventName="OnTaskFailed"
+                  DTS:LocaleID="-1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:Description="The propagate property of the event"
+                      DTS:DTSID="{D590C896-0FD8-4B34-ADF9-B489FAB60B70}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="System"
+                      DTS:ObjectName="Propagate">
+                      <DTS:VariableValue
+                        DTS:DataType="11">-1</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:Executables />
+                </DTS:EventHandler>
+              </DTS:EventHandlers>
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>Test.dtsx</PackageName>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Execute SQL Process"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{23C18C0D-495F-455B-AA80-574E8CFAA4EE}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Process"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="EXEC ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="NewParameterName"
+                    SQLTask:DtsVariableName="User::ProcessType"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="50" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Get New Work"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{abf87029-f5f0-46d8-b5e6-dac3a70d623b}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Get New Work"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="EXEC dbo.AuthProcessMasterWorkUpdate ?"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="Processname"
+                    SQLTask:DtsVariableName="User::ProcessName" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="ProcessObjectType"
+                    SQLTask:DtsVariableName="User::ProcessObjectType" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="ProcessType"
+                    SQLTask:DtsVariableName="User::ProcessType" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::WorkEngineId"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Set Process as Completed"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{1DF0A72F-3AFF-4899-87F5-C553DA69BACC}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Set Process as Completed"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="dbo.AuthProcessMasterUpdateCompletion ?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="WorkEngineId"
+                    SQLTask:DtsVariableName="User::WorkEngineId"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="131"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="TaskName"
+                    SQLTask:DtsVariableName="System::TaskName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="ProcessName"
+                    SQLTask:DtsVariableName="User::ProcessName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Work Engines\Work Engine 1\Update Process to Failure for Failed Dependency"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{6D3927C6-F7C0-40E4-AA64-073E4CFDEDF4}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update Process to Failure for Failed Dependency"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{DE694F52-40AB-4CC9-8CFF-BF1D4E32D211}"
+                  SQLTask:SqlStatementSource="EXEC dbo.AuthProcessMasterUpdateFailure ?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="WorkEngineId"
+                    SQLTask:DtsVariableName="User::WorkEngineId"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="TaskName"
+                    SQLTask:DtsVariableName="System::TaskName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="50" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="ProcessName"
+                    SQLTask:DtsVariableName="User::ProcessName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="50" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{E8B989CD-F671-4576-A4DA-B6D490548360}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::RecordsWaiting] &gt; 0"
+              DTS:From="Package\Work Engines\Work Engine 1\Are there records waiting on dependencies?"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Work Engines\Work Engine 1\Get New Work" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{B2E90A10-F3D7-439E-9373-7C8F5E28D8AB}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::ProcessName] == &quot;&quot;"
+              DTS:From="Package\Work Engines\Work Engine 1\Get New Work"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Work Engines\Work Engine 1\Delay Before looking for new work" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 10]"
+              DTS:CreationName=""
+              DTS:DTSID="{C0E2B1A3-4091-4EAC-8F60-39DBF3CFC2C4}"
+              DTS:From="Package\Work Engines\Work Engine 1\Set Process as Completed"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 10"
+              DTS:To="Package\Work Engines\Work Engine 1\Clear Variables" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{9DF9DE04-68F5-4932-84E9-B1DDA7C59058}"
+              DTS:From="Package\Work Engines\Work Engine 1\Get New Work"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Work Engines\Work Engine 1\Dependencies Failed?" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{5B1C20C8-3E24-45CF-87D5-67F4EA7F3825}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::DependenciesFailed] &gt; 0"
+              DTS:From="Package\Work Engines\Work Engine 1\Dependencies Failed?"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Work Engines\Work Engine 1\Update Process to Failure for Failed Dependency" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 4]"
+              DTS:CreationName=""
+              DTS:DTSID="{27746B19-0CEE-438D-AF62-197618EAF36D}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::ProcessObjectType] == &quot;SQL&quot;"
+              DTS:From="Package\Work Engines\Work Engine 1\Dependencies Failed?"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 4"
+              DTS:To="Package\Work Engines\Work Engine 1\Execute SQL Process" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 5]"
+              DTS:CreationName=""
+              DTS:DTSID="{CC7EDF6A-97A4-4762-9CA4-EAD37659CA72}"
+              DTS:EvalOp="3"
+              DTS:Expression="@[User::ProcessObjectType] == &quot;SSIS&quot;"
+              DTS:From="Package\Work Engines\Work Engine 1\Dependencies Failed?"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 5"
+              DTS:To="Package\Work Engines\Work Engine 1\Execute Package Task" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 6]"
+              DTS:CreationName=""
+              DTS:DTSID="{C9C66F14-344A-4F98-8809-A2560C568868}"
+              DTS:From="Package\Work Engines\Work Engine 1\Execute SQL Process"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 6"
+              DTS:To="Package\Work Engines\Work Engine 1\Update Process to Failure for Failed Dependency"
+              DTS:Value="1" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 7]"
+              DTS:CreationName=""
+              DTS:DTSID="{4F27B3AD-48EA-40A6-9414-B45BAB5F2C51}"
+              DTS:From="Package\Work Engines\Work Engine 1\Execute Package Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 7"
+              DTS:To="Package\Work Engines\Work Engine 1\Update Process to Failure for Failed Dependency"
+              DTS:Value="1" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 8]"
+              DTS:CreationName=""
+              DTS:DTSID="{100FA65C-B133-472B-9F28-1B6B9FE45E66}"
+              DTS:From="Package\Work Engines\Work Engine 1\Execute Package Task"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 8"
+              DTS:To="Package\Work Engines\Work Engine 1\Set Process as Completed" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 9]"
+              DTS:CreationName=""
+              DTS:DTSID="{0BEEADCE-8466-46FD-BF19-6EE58A532C42}"
+              DTS:From="Package\Work Engines\Work Engine 1\Execute SQL Process"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 9"
+              DTS:To="Package\Work Engines\Work Engine 1\Set Process as Completed" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BC91F2DE-C8ED-4031-967F-2840894D0E84}"
+      DTS:From="Package\ProcessMasterSetForRun"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\ProcessMasterDependencyPreperation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{413017D1-2E9A-4987-AB94-F3955F111F45}"
+      DTS:From="Package\ProcessMasterDependencyPreperation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Work Engines" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="203,42"
+          Id="Package\ProcessMasterDependencyPreperation"
+          TopLeft="461,129" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\ProcessMasterSetForRun"
+          TopLeft="466,48" />
+        <NodeLayout
+          Size="286,42"
+          Id="Package\Work Engines\Work Engine 1\Are there records waiting on dependencies?"
+          TopLeft="17.6923076923077,15.5521978021973" />
+        <NodeLayout
+          Size="241,42"
+          Id="Package\Work Engines\Work Engine 1\Delay Before looking for new work"
+          TopLeft="356.307692307692,102.013736263737" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Work Engines\Work Engine 1\Dependencies Failed?"
+          TopLeft="65.076923076923,189.846153846154" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Work Engines\Work Engine 1\Execute Package Task"
+          TopLeft="371.307692307692,197.538461538462" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Work Engines\Work Engine 1\Execute SQL Process"
+          TopLeft="44.2307692307692,300.153846153846" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Work Engines\Work Engine 1\Get New Work"
+          TopLeft="73.6923076923078,105.384615384615" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\Work Engines\Work Engine 1\Update Process to Failure for Failed Dependency"
+          TopLeft="240.615384615385,299.692307692308" />
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint]"
+          TopLeft="157.942307692308,57.5521978021973">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.832417582418"
+              Start="0,0"
+              End="0,40.332417582418">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.332417582418" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,12.166208791209,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 1]"
+          TopLeft="236.692307692308,124.699175824176">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="119.615384615384,0"
+              Start="0,0"
+              End="112.115384615384,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="112.115384615384,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="48.0576923076921,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 2]"
+          TopLeft="155.134615384615,147.384615384615">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.4615384615385"
+              Start="0,0"
+              End="0,34.9615384615385">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.9615384615385" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 3]"
+          TopLeft="183.74358974359,231.846153846154">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="124.538461538462,67.8461538461541"
+              Start="0,0"
+              End="124.538461538462,60.3461538461541">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9583187876699" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.9583187876699"
+                    Point2="0,33.9583187876699"
+                    Point3="4,33.9583187876699" />
+                  <mssgle:LineSegment
+                    End="120.538461538462,33.9583187876699" />
+                  <mssgle:CubicBezierSegment
+                    Point1="120.538461538462,33.9583187876699"
+                    Point2="124.538461538462,33.9583187876699"
+                    Point3="124.538461538462,37.9583187876699" />
+                  <mssgle:LineSegment
+                    End="124.538461538462,60.3461538461541" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="54.269230769231,38.9583187876699,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 4]"
+          TopLeft="129.570512820513,231.846153846154">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.307692307692"
+              Start="0,0"
+              End="0,60.807692307692">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.807692307692" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,22.403846153846,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 5]"
+          TopLeft="245.076923076923,214.692307692308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="126.230769230769,0"
+              Start="0,0"
+              End="118.730769230769,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="118.730769230769,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="51.3653846153845,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 6]"
+          TopLeft="104.564102564103,342.153846153846">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="235.551282051282,-0.461538461537941"
+              Start="0,0"
+              End="235.551282051282,7.03846153846206">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.5"
+                    Point2="0,22.5"
+                    Point3="4,22.5" />
+                  <mssgle:LineSegment
+                    End="231.551282051282,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="231.551282051282,22.5"
+                    Point2="235.551282051282,22.5"
+                    Point3="235.551282051282,18.5" />
+                  <mssgle:LineSegment
+                    End="235.551282051282,7.03846153846206" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="102.534293369391,27.5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 7]"
+          TopLeft="433.641025641025,239.538461538462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-61.692307692307,60.1538461538461"
+              Start="0,0"
+              End="-61.692307692307,52.6538461538461">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.1028089201887" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.1028089201887"
+                    Point2="0,30.1028089201887"
+                    Point3="-4,30.1028089201887" />
+                  <mssgle:LineSegment
+                    End="-57.692307692307,30.1028089201887" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-57.692307692307,30.1028089201887"
+                    Point2="-61.692307692307,30.1028089201887"
+                    Point3="-61.692307692307,34.1028089201887" />
+                  <mssgle:LineSegment
+                    End="-61.692307692307,52.6538461538461" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-46.0875015024035,35.1028089201887,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Work Engines\Work Engine 1\Set Process as Completed"
+          TopLeft="430,407" />
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 8]"
+          TopLeft="491.974358974359,239.538461538462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.3589743589747,167.461538461538"
+              Start="0,0"
+              End="45.3589743589747,159.961538461538">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.6210339413214" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,79.6210339413214"
+                    Point2="0,83.6210339413214"
+                    Point3="4,83.6210339413214" />
+                  <mssgle:LineSegment
+                    End="41.3589743589747,83.6210339413214" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.3589743589747,83.6210339413214"
+                    Point2="45.3589743589747,83.6210339413214"
+                    Point3="45.3589743589747,87.6210339413214" />
+                  <mssgle:LineSegment
+                    End="45.3589743589747,159.961538461538" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 9]"
+          TopLeft="160.897435897436,342.153846153846">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="324.769230769231,64.846153846154"
+              Start="0,0"
+              End="324.769230769231,57.346153846154">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.3923347824842" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.3923347824842"
+                    Point2="0,32.3923347824842"
+                    Point3="4,32.3923347824842" />
+                  <mssgle:LineSegment
+                    End="320.769230769231,32.3923347824842" />
+                  <mssgle:CubicBezierSegment
+                    Point1="320.769230769231,32.3923347824842"
+                    Point2="324.769230769231,32.3923347824842"
+                    Point3="324.769230769231,36.3923347824842" />
+                  <mssgle:LineSegment
+                    End="324.769230769231,57.346153846154" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Work Engines\Work Engine 1\Clear Variables"
+          TopLeft="435,487" />
+        <EdgeLayout
+          Id="Package\Work Engines\Work Engine 1.PrecedenceConstraints[Constraint 10]"
+          TopLeft="514,449">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="637,584"
+          Size="637,627"
+          Id="Package\Work Engines\Work Engine 1"
+          TopLeft="38.4615384615385,22.7692307692307" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1715,708"
+          Size="1715,751"
+          Id="Package\Work Engines"
+          TopLeft="48,210" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="563,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="562.5,171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="343,39"
+              Start="0,0"
+              End="343,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5"
+                    Point2="0,19.5"
+                    Point3="4,19.5" />
+                  <mssgle:LineSegment
+                    End="339,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="339,19.5"
+                    Point2="343,19.5"
+                    Point3="343,23.5" />
+                  <mssgle:LineSegment
+                    End="343,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
